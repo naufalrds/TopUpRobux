@@ -140,4 +140,18 @@
   $("cartClear").addEventListener("click", () => { cart = []; save(); render(); });
 
   render();
+
+  // menu hamburger (HP)
+  const navToggle = $("navToggle");
+  const navLinks = $("navLinks");
+  const setNav = (open) => {
+    navLinks.classList.toggle("is-open", open);
+    navToggle.classList.toggle("is-open", open);
+    navToggle.setAttribute("aria-expanded", open);
+    navToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+  };
+  navToggle.addEventListener("click", () => setNav(!navLinks.classList.contains("is-open")));
+  navLinks.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setNav(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setNav(false); });
+  window.matchMedia("(min-width: 641px)").addEventListener("change", (e) => { if (e.matches) setNav(false); });
 })();
