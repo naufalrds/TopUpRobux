@@ -12,7 +12,7 @@
   const toastEl = $("toast");
 
   const rupiah = (n) => "Rp " + n.toLocaleString("id-ID");
-  const parsePrice = (t) => parseInt(t.replace(/\D/g, ""), 10) || 0;
+  const parsePrice = (t) => parseInt(((t.match(/\d[\d.]*/) || ["0"])[0]).replace(/\./g, ""), 10) || 0;
 
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (e) { cart = []; }
